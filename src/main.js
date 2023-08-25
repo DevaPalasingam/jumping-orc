@@ -6,10 +6,21 @@ const SPEED = 480;
 
 kaboom();
 loadSprite("orc", "sprites/orc/walking/right_tile000.png");
+loadSprite("background", "sprites/bg_mountain.jpg");
+loadSprite("bean", "sprites/bean.png");
 
 scene("game", () => {
   setGravity(1600);
-  const orc = add([sprite("orc"), pos(80, 40), area(), body()]);
+  const orc = add([
+    sprite("orc"),
+    z(1),
+    pos(80, 40),
+    area({ scale: 0.5 }),
+    anchor("bot"),
+    body(),
+  ]);
+
+  add([sprite("background", { width: width(), height: height() }, z(0))]);
 
   // floor
   add([
@@ -45,7 +56,7 @@ scene("game", () => {
     ]);
 
     // wait a random amount of time to spawn next tree
-    wait(rand(0.5, 1.5), spawnTree);
+    wait(rand(0.7, 2), spawnTree);
   }
 
   spawnTree();
